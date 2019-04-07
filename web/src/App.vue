@@ -5,24 +5,7 @@
       v-model="drawer"
       app
     >
-      <v-list dense>
-        <v-list-tile to="/">
-          <v-list-tile-action>
-            <v-icon>home</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>Scoreboard</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile to="/users">
-          <v-list-tile-action>
-            <v-icon>contact_mail</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>Create user</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
+      <side-menu />
     </v-navigation-drawer>
     <v-toolbar color="indigo" dark fixed app>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
@@ -40,7 +23,7 @@
 </template>
 
 <script>
-import Scoreboard from "./components/Scoreboard"
+import SideMenu from "./components/SideMenu"
 
 export default {
   name: 'App',
@@ -48,6 +31,9 @@ export default {
     return {
       drawer: false,
     }
+  },
+  components: {
+    'side-menu': SideMenu
   },
   created () {
     this.$store.dispatch('load')

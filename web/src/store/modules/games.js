@@ -22,8 +22,8 @@ const actions = {
     commit('SET_GAMES', response.data)
   },
   async create ({ commit }, game) {
-    await axios.post('/games', game)
-    // commit('SET_GAMES', game)
+    axios.post('/games', game)
+    commit('ADD_GAME', game)
   }
 }
 
@@ -33,6 +33,9 @@ const mutations = {
     state.all = games
     state.loaded = true
     // localStorage.setItem("games/all", JSON.stringify(state.all))
+  },
+  ADD_GAME (stae, game) {
+    state.all.push(game)
   }
 }
 

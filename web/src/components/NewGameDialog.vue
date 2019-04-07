@@ -16,13 +16,13 @@
             item-value="id"
             label="Player One"
             style="margin: 2px"
-            v-model="player_one_id"
+            v-model="playerOneId"
           ></v-autocomplete>
           <v-text-field
             label="Player one score"
             type="number"
             style="margin: 2px"
-            v-model="player_one_score"
+            v-model="playerOneScore"
           ></v-text-field>
         </v-layout>
         <v-layout row wrap>
@@ -34,13 +34,13 @@
             item-value="id"
             label="Player Two"
             style="margin: 2px"
-            v-model="player_two_id"
+            v-model="playerTwoId"
           ></v-autocomplete>
           <v-text-field
             label="Player two score"
             type="number"
             style="margin: 2px"
-            v-model="player_two_score"
+            v-model="playerTwoScore"
           ></v-text-field>
         </v-layout>
       </v-card-text>
@@ -60,10 +60,10 @@ export default {
   props: ['visible'],
   data() {
     return {
-      player_one_id: null,
-      player_two_id: null,
-      player_one_score_value: null,
-      player_two_score_value: null
+      playerOneId: null,
+      playerTwoId: null,
+      playerOneScoreValue: null,
+      playerTwoScoreValue: null
     }
   },
   computed: {
@@ -78,20 +78,20 @@ export default {
         this.$emit('hide', value);
       }
     },
-    player_one_score: {
+    playerOneScore: {
       get() {
-        return this.player_one_score_value
+        return this.playerOneScoreValue
       },
       set(value) {
-        this.player_one_score_value = parseInt(value, 10)
+        this.playerOneScoreValue = parseInt(value, 10)
       }
     },
-    player_two_score: {
+    playerTwoScore: {
       get() {
-        return this.player_two_score_value
+        return this.playerTwoScoreValue
       },
       set(value) {
-        this.player_two_score_value = parseInt(value, 10)
+        this.playerTwoScoreValue = parseInt(value, 10)
       }
     }
   },
@@ -107,16 +107,16 @@ export default {
     saveGame() {
       const self = this
       this.createGame({
-        player_one_id: this.player_one_id,
-        player_two_id: this.player_two_id,
-        player_one_score: this.player_one_score_value,
-        player_two_score: this.player_two_score_value
+        playerOneId: this.playerOneId,
+        playerTwoId: this.playerTwoId,
+        playerOneScore: this.playerOneScoreValue,
+        playerTwoScore: this.playerTwoScoreValue
       }).then(() => {
         this.$emit('hide', false);
-        self.player_one_id = null
-        self.player_two_id = null
-        self.player_one_score_value = null
-        self.player_two_score_value = null
+        self.playerOneId = null
+        self.playerTwoId = null
+        self.playerOneScoreValue = null
+        self.playerTwoScoreValue = null
       })
     }
   }

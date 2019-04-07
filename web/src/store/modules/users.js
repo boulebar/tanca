@@ -22,19 +22,25 @@ const actions = {
     commit('SET_USERS', response.data)
   },
   async create ({ commit }, user) {
-    await axios.post('/users', user)
-    commit('ADD_USER', user)
+    const response = await axios.post('/users', user)
+    commit('ADD_USER', response.data)
   }
 }
 
 // mutations
 const mutations = {
   SET_USERS (state, users) {
+    // Just copy the current ranking, for testing purposes.
+    for (let i = 0; i < users.length; i++) {
+      const user = users[i];
+      user.baseRanking = user.ranking
+    }
     state.all = users
     state.loaded = true
     // localStorage.setItem("users/all", JSON.stringify(state.all))
   },
   ADD_USER (stae, user) {
+    user.baseRanking = user.ranking
     state.all.push(user)
   }
 }

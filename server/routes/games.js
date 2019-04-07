@@ -1,5 +1,17 @@
 var express = require('express');
 var router = express.Router();
+const decamelize = require('decamelize');
+
+
+const deCamelizeColumns = (data) => {
+  for (let prop in data) {
+    const camel = decamelize(prop);
+    if (!(camel in data)) {
+      data[camel] = data[prop];
+      delete data[prop];
+    }
+  }
+}
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -12,8 +24,10 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  console.log('req.body', req.body);
-  req.db.any('INSERT INTO games (player_one_id, player_two_id, player_one_score, player_two_score) VALUES (${player_one_id}, ${player_two_id}, ${player_one_score}, ${player_two_score});', req.body)
+  const params = req.body
+  deCamelizeColumns(params)
+
+  req.db.any('INSERT INTO games (player_one_id, player_two_id, player_one_score, player_two_score) VALUES (${player_one_id}, ${player_two_id}, ${player_one_score}, ${player_two_score});', params)
         .then((data) => {
           res.json(data);
         }).catch((error) => {
