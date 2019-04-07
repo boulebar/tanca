@@ -1,6 +1,7 @@
 {
   "scripts": {
     "start": "node ./server/bin/www",
-    "postinstall": "cd server && npm install && cd .."
+    "postinstall": "cd server && npm install && cd ..",
+    "heroku-postbuild": "cd web && npm run build && cp ./dist/* ../server/public/."
   }
 }
