@@ -1,5 +1,7 @@
 {
   "scripts": {
-    "start": "node ./server/bin/www"
+    "start": "node ./server/bin/www",
+    "heroku-prebuild": "cd server",
+    "heroku-postbuild": "cd .."
   }
 }
