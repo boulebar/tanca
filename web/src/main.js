@@ -7,7 +7,11 @@ import axios from 'axios'
 
 Vue.config.productionTip = false
 
-axios.defaults.baseURL = 'http://localhost:3000'
+if(process.env.NODE_ENV !== 'production') {
+  axios.defaults.baseURL = 'http://localhost:3000'
+} else {
+  axios.defaults.baseURL = '/api'
+}
 
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
