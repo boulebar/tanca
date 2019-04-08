@@ -2,8 +2,8 @@
   "scripts": {
     "start": "node ./server/bin/www",
     "postinstall": "cd server && npm install && cd ../web && npm install",
-    "heroku-postbuild": "if test \"$NODE_ENV\" = \"production\" ; then cd web && npm run build && cp ./dist/* ../server/public/. ; fi;"
-  }, 
+    "heroku-postbuild": "if test \"$NODE_ENV\" = \"production\" ; then cd web && npm run build && cp -r ./dist/* ../server/public/. ; fi;"
+  },
   "engines": {
     "node": "11.10.1"
   }
