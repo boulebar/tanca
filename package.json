@@ -2,6 +2,6 @@
   "scripts": {
     "start": "node ./server/bin/www",
     "postinstall": "cd server && npm install && cd ../web && npm install",
-    "heroku-postbuild": "cd web && npm run build && cp ./dist/* ../server/public/."
+    "heroku-postbuild": "if test \"$NODE_ENV\" = \"production\" ; then cd web && npm run build && cp ./dist/* ../server/public/. ; fi;"
   }
 }
